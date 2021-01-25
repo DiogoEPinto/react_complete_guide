@@ -1,50 +1,55 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
 
-const app = props => {
-  //useState returns an array with 2 elements:
-  //the first one is our current State
-  //the second one is a function that allows us to update the current state 
-  const [personsState, setPersonsState] = useState({
+class App extends Component {
+
+  // The 'state' should be used carefully. It is streated as a JS object.
+  // It should be used carefully, because changes in 'state' cause the DOM to re-render everything.
+  state = {
+    //'persons' is a array of JS objects, with different properties.
     persons: [
       { name: 'Max', age: 28 },
       { name: 'Manu', age: 29 },
       { name: 'Stephanie', age: 26 }
-    ]
-  });
+    ],
+    otherState: 'some other value'
+  }
 
-  const [otherState, setOtherState] = useState('some other value');
+  //It's good pratice to name it 'Handler'. 
+  switchNameHandler = () => {
+    // console.log('Was clicked!');
 
-  console.log(personsState, otherState);
+    // THIS DOESN'T WORK. You cannot mutate state directly.
+    // this.state.persons[0].name = 'Maximilian';
 
-  // When using React Hooks, this will not merge this with the previous state.
-  // Instead it replaces the existing state.
-  // This is why we have two const for two states.
-  const switchNameHandler = () => {
-    setPersonsState({
+    //'setState' accepts a JS Object as a param.
+    //It merges whatever we pass it with our existing data.
+    this.setState({
       persons: [
         { name: 'Maximilian', age: 28 },
         { name: 'Manu', age: 29 },
         { name: 'Stephanie', age: 27 }
-      ]
-    });
-  };
+      ],
+    })
+  }
 
-  return (
-    <div className="App">
-      <h1>Hi, im a React App.</h1>
-      <p>This is really working</p>
-      <button onClick={switchNameHandler}>Switch Name</button>
-      <Person name={personsState.persons[0].name} age={personsState.persons[0].age} />
-      <Person name={personsState.persons[1].name} age={personsState.persons[1].age}>My Hobbies: Racing</Person>
-      <Person name={personsState.persons[2].name} age={personsState.persons[2].age} />
-    </div>
-  );
+  //'render' is a method of our 'App' class.
+  render() {
+    return (
+      //Remember, react uses JSX and not HTML.
+      //When 'this' is called, it is refering to the 'App'.
+      <div className="App">
+        <h1>Hi, im a React App.</h1>
+        <p>This is really working</p>
+        <button onClick={this.switchNameHandler}>Switch Name</button>
+        <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
+        <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>My Hobbies: Racing</Person>
+        <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
+      </div>
+    );
 
-
+  }
 }
 
-export default app;
-
-
+export default App;
