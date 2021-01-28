@@ -7,9 +7,9 @@ class App extends Component {
 
   state = {
     persons: [
-      { name: 'Max', age: 28 },
-      { name: 'Manu', age: 29 },
-      { name: 'Stephanie', age: 26 }
+      { id: 'snj1', name: 'Max', age: 28 },
+      { id: 'djs2', name: 'Manu', age: 29 },
+      { id: 'snl3', name: 'Stephanie', age: 26 }
     ],
     otherState: 'some other value',
     showPersons: false
@@ -18,8 +18,8 @@ class App extends Component {
   deletePersonHandler = (personIndex) => {
     //const persons = this.state.persons.slice();   // Basically copies the existing data into a new persons.
     const persons = [...this.state.persons];        // Spreads the data into a new array. (confusing)
-    persons.splice(personIndex, 1);       
-    this.setState({persons: persons})
+    persons.splice(personIndex, 1);
+    this.setState({ persons: persons })
   }
 
   nameChangedHandler = (event) => {
@@ -56,7 +56,8 @@ class App extends Component {
             return <Person
               click={() => this.deletePersonHandler(index)}
               name={person.name}
-              age={person.age} />
+              age={person.age}
+              key={person.id} />
           })}
         </div>
       );
