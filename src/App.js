@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import classes from './App.css';        // Look up 'CSS Modules' to see how to enable this.
+import classes from './App.css';        // Look up 'CSS Modules' to see how to enable this. Depends on React Scripts version.
 import Person from './Person/Person';
 
 class App extends Component {
