@@ -34,7 +34,7 @@ class App extends Component {
 
     // This is an alternative way. This will copy the properties of the object into a new object.
     // const person = object.assign({}, this.state.persons[personIndex]);
-
+ 
     person.name = event.target.value;
 
     const persons = [...this.state.persons];
@@ -50,7 +50,8 @@ class App extends Component {
 
   render() {
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -73,6 +74,9 @@ class App extends Component {
           })}
         </div>
       );
+
+      // Dynamic styling
+      style.backgroundColor = 'red';
     }
 
     return (
