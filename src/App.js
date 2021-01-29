@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Radium from 'radium';
 import Person from './Person/Person';
 import './Person/Person.css';
 
@@ -34,7 +35,7 @@ class App extends Component {
 
     // This is an alternative way. This will copy the properties of the object into a new object.
     // const person = object.assign({}, this.state.persons[personIndex]);
- 
+
     person.name = event.target.value;
 
     const persons = [...this.state.persons];
@@ -55,7 +56,11 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     };
 
     let persons = null;
@@ -77,14 +82,18 @@ class App extends Component {
 
       // Dynamic styling
       style.backgroundColor = 'red';
+      style[':hover']= {
+        backgroundColor: 'salmon',
+        color: 'black'
+      }
     }
 
     const classes = [];
-    if(this.state.persons.length <= 2){
-      classes.push('red'); 
+    if (this.state.persons.length <= 2) {
+      classes.push('red');
     }
 
-    if(this.state.persons.length <= 1){
+    if (this.state.persons.length <= 1) {
       classes.push('bold');
     }
 
@@ -103,4 +112,5 @@ class App extends Component {
   }
 }
 
-export default App;
+// High order componente. A component wraping another component.
+export default Radium(App);
