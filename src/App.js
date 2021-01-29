@@ -1,21 +1,7 @@
 import React, { Component } from 'react';
 
-import './App.css';
+import classes from './App.css';        // Look up 'CSS Modules' to see how to enable this.
 import Person from './Person/Person';
-
-const StyledButton = styled.button`
-      background-color: ${props => props.alt ? 'red' : 'green'};
-      color: white;
-      font: inherit;
-      border: 1px solid blue;
-      padding: 8px;
-      cursor: pointer;
-
-      &:hover {
-        background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
-        color: black;
-      }
-`;
 
 class App extends Component {
 
@@ -32,7 +18,7 @@ class App extends Component {
   deletePersonHandler = (personIndex) => {
     //const persons = this.state.persons.slice();   // Basically copies the existing data into a new persons.
     const persons = [...this.state.persons];        // Spreads the data into a new array. (confusing)
-    persons.splice(personIndex, 1);
+    persons.splice(personIndex, 1);                 // What does Splice do???
     this.setState({ persons: persons })
   }
 
@@ -42,12 +28,8 @@ class App extends Component {
     });
 
     const person = {
-      // This spread operator will distribute all the properties of the object we fetch, into the new object.
-      ...this.state.persons[personIndex]
+      ...this.state.persons[personIndex]    // We fetch an object and use spread to distribute it's properties to a new object.
     };
-
-    // This is an alternative way. This will copy the properties of the object into a new object.
-    // const person = object.assign({}, this.state.persons[personIndex]);
 
     person.name = event.target.value;
 
@@ -63,22 +45,9 @@ class App extends Component {
   }
 
   render() {
-    /* const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
-    }; */
-
     let persons = null;
+    let btnClass = [classes.Button];
 
-    // Checks if persons is true or false
     if (this.state.showPersons) {
       persons = (
         <div>
@@ -93,28 +62,23 @@ class App extends Component {
         </div>
       );
 
-      // Dynamic styling
-      /* style.backgroundColor = 'red';
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      } */
+      btnClass.push(classes.Red);
     }
 
-    const classes = [];
+    const assignedClasses= [];
     if (this.state.persons.length <= 2) {
-      classes.push('red');
+      assignedClasses.push(classes.red);
     }
 
     if (this.state.persons.length <= 1) {
-      classes.push('bold');
+      assignedClasses.push(classes.bold);
     }
 
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>Hi, im a React App.</h1>
-        <p className={classes.join(' ')}>This is really working!</p>
-        <button className="button" onClick={this.togglePersonsHandler}>
+        <p className={assignedClasses.join(' ')}>This is really working!</p>
+        <button className={btnClass.join(' ')} onClick={this.togglePersonsHandler}>
           Toggle Persons
         </button>
         {persons}
