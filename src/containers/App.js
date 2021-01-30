@@ -7,6 +7,12 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
 
+  // This is a class based component. Therefore we have access to lifecicle hooks.
+  constructor(props) {
+    super(props);   // Basically executes the constructor of the component we're extending. Makes sure everything is initialized correctly.
+    console.log('[App.js] constructor');
+  }
+
   state = {
     persons: [
       { id: 'snj1', name: 'Max', age: 28 },
@@ -15,6 +21,19 @@ class App extends Component {
     ],
     otherState: 'some other value',
     showPersons: false
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state;
+  }
+
+  componentWillMount() {
+    console.log.apply('[App.js] componentWillMount');
+  }
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount');
   }
 
   deletePersonHandler = (personIndex) => {
@@ -47,6 +66,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('[App.js] render');
     let persons = null;
 
     if (this.state.showPersons) {
