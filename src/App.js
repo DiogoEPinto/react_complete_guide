@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
-import classes from './App.css';        // Look up 'CSS Modules' to see how to enable this.
+import classes from './App.css';        // Look up 'CSS Modules' to see how to enable this. Depends on React Scripts version.npm
 import Person from './Person/Person';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
 
@@ -52,12 +53,13 @@ class App extends Component {
       persons = (
         <div>
           {this.state.persons.map((person, index) => {
-            return <Person
-              click={() => this.deletePersonHandler(index)}
-              name={person.name}
-              age={person.age}
-              key={person.id}
-              changed={(event) => this.nameChangedHandler(event, person.id)} />
+            return <ErrorBoundary key={person.id}>
+              <Person     
+                click={() => this.deletePersonHandler(index)}
+                name={person.name}
+                age={person.age}
+                changed={(event) => this.nameChangedHandler(event, person.id)} />
+            </ErrorBoundary>
           })}
         </div>
       );
@@ -65,7 +67,7 @@ class App extends Component {
       btnClass = classes.Red;
     }
 
-    const assignedClasses= [];
+    const assignedClasses = [];
     if (this.state.persons.length <= 2) {
       assignedClasses.push(classes.red);
     }
