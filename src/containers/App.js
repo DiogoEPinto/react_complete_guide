@@ -36,6 +36,15 @@ class App extends Component {
     console.log('[App.js] componentDidMount');
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[App.js] shouldComponentUpdate');
+    return true;
+  }
+
+  componentDidUpdate() {
+    console.log('[App.js] componentDidUpdate');
+  }
+
   deletePersonHandler = (personIndex) => {
     //const persons = this.state.persons.slice();   // Basically copies the existing data into a new persons.
     const persons = [...this.state.persons];        // Spreads the data into a new array. (confusing)
