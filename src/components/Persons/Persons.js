@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import Person from './Person/Person';
 
-class Persons extends Component {
+// PureComponent already implements 'shouldComponentUpdate' for changes in ANY prop.
+class Persons extends PureComponent {       
     /*  static getDerivedStateFromProps(props, state) {
          console.log('[Persons.js] getDerivedStateFromProps');
          return state;
@@ -16,14 +17,16 @@ class Persons extends Component {
 
      } */
 
-    shouldComponentUpdate(nextProps, nextState) {
+   /*  shouldComponentUpdate(nextProps, nextState) {
         console.log('[Persons.js] shouldComponentUpdate');
-        if (nextProps.persons !== this.props.persons) {     // This will only re-render persons if it detects changes in persons.
+        if (nextProps.persons !== this.props.persons ||         // This will only re-render persons if it detects changes in persons.
+            nextProps.changed !== this.props.changed ||         // If it's changed.
+            nextProps.clicked !== this.props.clicked) {         // If it's clicked.
             return true;
         } else {
             return false;
         }
-    }
+    } */
 
     getSnapshotBeforeUpdate(prevProps, prevState) {
         console.log('[Persons.js] getSnapshotBeforeUpdate');
