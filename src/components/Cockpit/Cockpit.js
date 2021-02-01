@@ -28,10 +28,10 @@ const cockpit = (props) => {
     }
 
     const assignedClasses = [];
-    if (props.persons.length <= 2) {    // Change text color if number of persons is lower than or equals to 2.
+    if (props.personsLength <= 2) {    // Change text color if number of persons is lower than or equals to 2.
         assignedClasses.push(classes.red);
     }
-    if (props.persons.length <= 1) {    // Change text weight if number of persons is lower than or equals to 1.
+    if (props.personsLength <= 1) {    // Change text weight if number of persons is lower than or equals to 1.
         assignedClasses.push(classes.bold);
     }
 
@@ -46,4 +46,4 @@ const cockpit = (props) => {
     );
 };
 
-export default cockpit;
+export default React.memo(cockpit);     // React will save a snapshot of the component and only re-render if the content changes.
