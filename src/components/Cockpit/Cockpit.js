@@ -9,7 +9,17 @@ const cockpit = (props) => {
         setTimeout(() => {
             alert('Saved data to cloud!');  // Fake http request. 
         }, 1000);
+        return () => {
+            console.log('[Cockpit.js] cleanup work in useEffect');
+        };
     }, []);    // This will only run the first time. With '[props.persons]' it would run if it detects changes to 'persons'.
+
+    useEffect(() => {
+        console.log('[Cockpit.js] 2nd useEffect');
+        return () => {
+            console.log('[Cockpit.js] cleanup work in 2nd useEffect');
+        };
+    });
 
     let btnClass = '';
     if (props.showPersons) {            // Change button color if persons is showing or not.
