@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import classes from './App.css';        // Look up 'CSS Modules' to see how to enable this. Depends on React Scripts version.
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
-import WithClass from '../hoc/WithClass';
+import withClass from '../hoc/withClass';
+import Aux from '../hoc/Auxiliary';
 
 class App extends Component {
 
@@ -91,7 +92,7 @@ class App extends Component {
     }
 
     return (
-      <withClass classes={classes.App}>
+      <Aux>
 
         <button onClick={() => {
           this.setState({ showCockpit: false });
@@ -104,10 +105,10 @@ class App extends Component {
           clicked={this.togglePersonsHandler} /> : null}
         {persons}
 
-      </withClass>
+      </Aux>
     );
 
   }
 }
 
-export default App;   // High order componente. A component wraping another component.
+export default withClass(App, classes.App);   
