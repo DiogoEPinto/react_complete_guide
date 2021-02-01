@@ -59,13 +59,13 @@ class App extends Component {
     });
 
     const person = {
-      ...this.state.persons[personIndex]    // We fetch an object and use spread to distribute it's properties to a new object.
+      ...this.state.persons[personIndex]        // We fetch an object and use spread to distribute it's properties to a new object.
     };
 
     person.name = event.target.value;
 
-    const persons = [...this.state.persons];
-    persons[personIndex] = person;
+    const persons = [...this.state.persons];    // This is important. We create a new object this way. 
+    persons[personIndex] = person;              // Later on it allows us to compare the arrays and not the pointers.
 
     this.setState({ persons: persons });
   }
@@ -92,15 +92,18 @@ class App extends Component {
 
     return (
       <div className={classes.App}>
+
         <button onClick={() => {
           this.setState({ showCockpit: false });
         }}>Remove Cockpit</button>
+
         {this.state.showCockpit ? <Cockpit
           title={this.props.appTitle}
           showPersons={this.state.showPersons}
           persons={this.state.persons}
           clicked={this.togglePersonsHandler} /> : null}
         {persons}
+
       </div>
     );
 
