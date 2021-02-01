@@ -3,10 +3,13 @@ import classes from './Cockpit.css';
 
 const cockpit = (props) => {
 
-    useEffect(() => {
+    useEffect(() => {       // Without any further coding this triggers on every re-render. Combines didMount and didUpdate.
         console.log('[Cockpit.js] useEffect');
         // Http request...
-    });
+        setTimeout(() => {
+            alert('Saved data to cloud!');  // Fake http request. 
+        }, 1000);
+    }, []);    // This will only run the first time. With '[props.persons]' it would run if it detects changes to 'persons'.
 
     let btnClass = '';
     if (props.showPersons) {            // Change button color if persons is showing or not.
