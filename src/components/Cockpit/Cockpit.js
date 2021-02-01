@@ -6,10 +6,11 @@ const cockpit = (props) => {
     useEffect(() => {       // Without any further coding this triggers on every re-render. Combines didMount and didUpdate.
         console.log('[Cockpit.js] useEffect');
         // Http request...
-        setTimeout(() => {
+        const timer = setTimeout(() => {
             alert('Saved data to cloud!');  // Fake http request. 
         }, 1000);
         return () => {
+            clearTimeout(timer);            // Cleanup timer. 
             console.log('[Cockpit.js] cleanup work in useEffect');
         };
     }, []);    // This will only run the first time. With '[props.persons]' it would run if it detects changes to 'persons'.
