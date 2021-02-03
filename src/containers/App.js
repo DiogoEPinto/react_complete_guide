@@ -8,7 +8,7 @@ import Aux from '../hoc/Auxiliary';
 
 class App extends Component {
 
-  // This is a class based component. Therefore we have access to lifecicle hooks.
+  // This is a class based component. Therefore we have access to lifecycle hooks.
   constructor(props) {
     super(props);   // Basically executes the constructor of the component we're extending. Makes sure everything is initialized correctly.
     console.log('[App.js] constructor');
@@ -22,7 +22,8 @@ class App extends Component {
     ],
     otherState: 'some other value',
     showPersons: false,
-    showCockpit: true
+    showCockpit: true,
+    changeCounter: 0
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -68,8 +69,13 @@ class App extends Component {
     const persons = [...this.state.persons];    // This is important. We create a new object this way. 
     persons[personIndex] = person;              // Later on it allows us to compare the arrays and not the pointers.
 
-    this.setState({ persons: persons });
-  }
+    this.setState((prevState, props) => {
+      return {
+        persons: persons,
+        changeCounter: prevState.changeCounter + 1
+      };
+    });
+  };
 
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
