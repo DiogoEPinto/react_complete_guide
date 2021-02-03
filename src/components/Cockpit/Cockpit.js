@@ -1,16 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import classes from './Cockpit.css';
 
 const cockpit = (props) => {
+    const toggleBtnRef = useRef(null);
 
     useEffect(() => {       // Without any further coding this triggers on every re-render. Combines didMount and didUpdate.
         console.log('[Cockpit.js] useEffect');
         // Http request...
-        const timer = setTimeout(() => {
-            alert('Saved data to cloud!');  // Fake http request. 
-        }, 1000);
+        /*  const timer = setTimeout(() => {
+             alert('Saved data to cloud!');  // Fake http request. 
+         }, 1000); */
+        toggleBtnRef.current.click();
         return () => {
-            clearTimeout(timer);            // Cleanup timer. 
+            /*  clearTimeout(timer);  */           // Cleanup timer. 
             console.log('[Cockpit.js] cleanup work in useEffect');
         };
     }, []);    // This will only run the first time. With '[props.persons]' it would run if it detects changes to 'persons'.
@@ -40,8 +42,10 @@ const cockpit = (props) => {
             <h1>{props.title}</h1>
             <p className={assignedClasses.join(' ')}>This is really working!</p>
             <button
+                ref={toggleBtnRef}
                 className={btnClass}
-                onClick={props.clicked}>Toggle Persons</button>
+                onClick={props.clicked}
+            >Toggle Persons</button>
         </div>
     );
 };
